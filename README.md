@@ -12,9 +12,9 @@ The major part of the challenge included making a doubly linked list that would 
 #PREQUISITES:
 To use the File handling part of the program a text file of name “playlist.txt” with certain data elements is required.
 Sample data elements-
-Animals
-Spaceman
-Apollo
-Care
-Fragile
-Melody
+Animals,
+Spaceman,
+Apollo,
+Care,
+Fragile,
+Melody.
