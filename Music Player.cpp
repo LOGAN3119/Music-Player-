@@ -234,6 +234,108 @@ void display()
     }
  }
 
+void play(struct node *first)
+{
+    char song[100];
+    printlist(first);
+    cout<<"\n\a\a\a\aChoose song you wish to play- ";
+    scanf("%s",song);
+    int flag=0;
+
+    while(first!=NULL)
+    {
+        if(strcmp(first->song,song)==0)
+        {
+            cout<<"\n\a\a\a\a=>Now Playing......"<<song<<endl;
+            flag++;
+            push (song);
+            break;
+        }
+        else
+        {
+            first=first->next;
+        }
+    }
+    if(flag==0)
+    {
+        cout<<"\n\a\a\a\a#Song Not found"<<endl;
+    }
+}
+
+void recent()
+{
+display();
+}
+
+void topelement()
+{
+    top1=top;
+    if(top1==NULL)
+    {
+        printf("\n\a\a\a\a#NO last played tracks.\n");
+        return;
+    }
+    cout<<"\n=>Last Played Song - "<<top->song<<endl;
+}
+
+
+void sort( node *&pointer)
+{
+
+struct node *a = NULL;
+struct node *b = NULL;
+struct node *c = NULL;
+struct node *e = NULL;
+struct node *tmp = NULL;
+while(e != pointer->next)
+{
+    c = a = pointer;
+    b = a->next;
+    while(a != e)
+        {
+            if(strcmp(a->song,a->song))
+            {
+                if(a == pointer)
+                {
+                    tmp = b -> next;
+                    b->next = a;
+                    a->next = tmp;
+                    pointer = b;
+                    c = b;
+                }
+            else
+            {
+                tmp = b->next;
+                b->next = a;
+                a->next = tmp;
+                c->next = b;
+                c = b;
+            }
+        }
+        else
+        {
+            c = a;
+            a = a->next;
+        }
+        b = a->next;
+        if(b == e)
+            e = a;
+        }
+    }
+}
+void addplaylist(struct node *start)
+{
+    fstream f1;
+    string line;
+    f1.open("playlist.txt",ios::in);
+    while(!f1.eof())
+    {
+        getline(f1,line);
+        add_node_file(start,line);
+    }
+    cout<<"Playlist Added"<<endl;
+    f1.close();
+}
 
 void del_search(struct node *start)
 {
@@ -300,7 +402,7 @@ main()
     create();
 
     do{
-        cout<<"\n1.Add  New Song\n2.Delete Song\n3.Display Entered Playlist\n4.Total Songs\n5.Search Song\n"<<endl;
+        cout<<"\n1.Add  New Song\n2.Delete Song\n3.Display Entered Playlist\n4.Total Songs\n5.Search Song\n6.Play Song\n7.Recently Played List\n8.Last Played\n9. Sorted playlist\n10.Add From File\n11.Exit"<<endl;
         cout<<("\n\a\a\a\aEnter your choice- ");
         cin>>choice;
 
@@ -316,6 +418,18 @@ main()
             break;
             case 5:search1(start);
             break;
+            case 6:play(start);
+            break;
+            case 7:recent();
+            break;
+            case 8:topelement();
+            break;
+            case 9:sort(start->next);
+            printlist(start);
+            break;
+            case 10:addplaylist(start);
+            break;
+            case 11:exit(0);
         }
     }while(choice!=11);
 }
